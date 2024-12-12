@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" max-width="500px" persistent>
     <v-card>
       <v-card-title class="text-h6 pa-4">
-        {{ editingDoctor ? 'Редактировать врача' : 'Добавить врача' }}
+        {{ isEditing ? 'Редактировать врача' : 'Добавить врача' }}
       </v-card-title>
 
       <v-card-text class="pt-4">
@@ -53,13 +53,13 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import type { VForm } from 'vuetify/components'
-import type { Doctor } from '@/utils/types/EmployeeTypes'
+import type { CreateDoctor, Doctor } from '@/utils/types/EmployeeTypes'
 import { formRules } from '@/utils/formRules'
 
 const props = defineProps<{
-  formData: Doctor
+  formData: CreateDoctor
   departments: string[]
-  editingDoctor: Doctor | null
+  isEditing: boolean
   loading: boolean
 }>()
 
@@ -73,13 +73,13 @@ const valid = ref(false)
 const form = ref<VForm>()
 const rules = formRules
 
-const localFormData = ref<Doctor>({...props.formData})
+const localFormData = ref<CreateDoctor>({ ...props.formData })
 
 async function save() {
   await form.value?.validate()
 
   if (valid.value) {
-    emit('save', localFormData.value)
+    emit('save', localFormData.value as Doctor)
   }
 }
 

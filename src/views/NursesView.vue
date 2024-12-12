@@ -18,7 +18,7 @@
       v-model:dialog="dialog"
       :formData="formData"
       :departments="departments"
-      :editingNurse="editingNurse"
+      :isEditing="!!editingNurse"
       :loading="loading"
       @save="saveNurse"
       @close="closeDialog"
@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useNursesStore } from '@/stores/nursesStore'
-import type { Nurse } from '@/utils/types/EmployeeTypes'
+import type { CreateNurse, Nurse } from '@/utils/types/EmployeeTypes'
 import { DepartmentsEnum } from '@/utils/enums'
 import NursesTable from '@/components/nurses/NursesTable.vue'
 import NurseFormDialog from '@/components/nurses/NurseFormDialog.vue'
@@ -44,7 +44,7 @@ const defaultFormData = {
   name: '',
   department: undefined,
 }
-const formData = ref<Nurse>(defaultFormData)
+const formData = ref<CreateNurse>(defaultFormData)
 const editingNurse = ref<Nurse | null>(null)
 
 const departments: string[] = Object.values(DepartmentsEnum)

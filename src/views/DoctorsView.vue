@@ -18,7 +18,7 @@
       v-model:dialog="dialog"
       :formData="formData"
       :departments="departments"
-      :editingDoctor="editingDoctor"
+      :isEditing="!!editingDoctor"
       :loading="loading"
       @save="saveDoctor"
       @close="closeDialog"
@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useDoctorsStore } from '@/stores/doctorsStore'
-import type { Doctor } from '@/utils/types/EmployeeTypes'
+import type { CreateDoctor, Doctor } from '@/utils/types/EmployeeTypes'
 import { DepartmentsEnum } from '@/utils/enums'
 import DoctorsTable from '@/components/doctors/DoctorsTable.vue'
 import DoctorFormDialog from '@/components/doctors/DoctorFormDialog.vue'
@@ -45,7 +45,7 @@ const defaultFormData = {
   department: undefined,
   isHead: false,
 }
-const formData = ref<Doctor>(defaultFormData)
+const formData = ref<CreateDoctor>(defaultFormData)
 const editingDoctor = ref<Doctor | null>(null)
 
 const departments: string[] = Object.values(DepartmentsEnum)
