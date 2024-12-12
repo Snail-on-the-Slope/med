@@ -17,3 +17,8 @@ export interface TableHeader {
   sortable?: boolean
   width?: string
 }
+
+export type SortItem = {
+  key: string;
+  order: 'asc' | 'desc';
+};

@@ -74,8 +74,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { DataTableCompareResult } from 'vuetify'
-import type { Nurse, TableHeader } from '@/utils/types/EmployeeTypes'
+import type { Nurse, SortItem, TableHeader } from '@/utils/types/EmployeeTypes'
 import ConfirmDeleteDialog from '@/components/common/ConfirmDeleteDialog.vue'
 
 defineProps({
@@ -95,7 +94,7 @@ const emit = defineEmits<{
 }>()
 
 const search = ref('')
-const sortBy = ref<DataTableCompareResult[]>([{ key: 'name', order: 'asc' }])
+const sortBy = ref<SortItem[]>([{ key: 'name', order: 'asc' }])
 const deleteDialog = ref(false)
 const nurseToDelete = ref<Nurse | null>(null)
 
