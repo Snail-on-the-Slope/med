@@ -65,13 +65,13 @@ const valid = ref(false)
 const form = ref<VForm>()
 const rules = formRules
 
-const localFormData = ref<Nurse>()
+const localFormData = ref<Nurse>({...props.formData})
 
 async function save() {
   await form.value?.validate()
 
   if (valid.value) {
-    emit('save', localFormData.value as Nurse)
+    emit('save', localFormData.value)
   }
 }
 
@@ -88,7 +88,7 @@ watch(
     localFormData.value = {
       id: newData.id,
       name: newData.name,
-      department: newData.department ?? undefined,
+      department: newData.department,
     }
   },
   { immediate: true, deep: true }

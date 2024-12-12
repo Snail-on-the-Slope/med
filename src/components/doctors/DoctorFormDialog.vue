@@ -73,13 +73,13 @@ const valid = ref(false)
 const form = ref<VForm>()
 const rules = formRules
 
-const localFormData = ref<Doctor>()
+const localFormData = ref<Doctor>({...props.formData})
 
 async function save() {
   await form.value?.validate()
 
   if (valid.value) {
-    emit('save', localFormData.value as Doctor)
+    emit('save', localFormData.value)
   }
 }
 

@@ -135,7 +135,7 @@ const confirmDelete = (doctor: Doctor) => {
 }
 
 const handleDelete = () => {
-  if (doctorToDelete.value) {
+  if (doctorToDelete.value?.id) {
     emit('delete', doctorToDelete.value.id)
     deleteDialog.value = false
     doctorToDelete.value = null
